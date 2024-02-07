@@ -2,6 +2,10 @@
 
 This code helps you search for keywords in a JSON file named "merged.json" and displays specific information ("fund_raised_percent" and "close_date") for matching entries.
 
+- Go to this website for the data.
+https://webrobots.io/indiegogo-dataset/
+
+
 ## How it works:
 
 - Run the code.
