@@ -1,0 +1,33 @@
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+/resources/Indiegogo_2023-11-17T20_40_31_433Z.json
+/resources/Indiegogo_2023-12-15T20_40_32_423Z.json
+/resources/Indiegogo_2024-01-15T14_13_29_668Z.json
+merged.json
