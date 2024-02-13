@@ -22,3 +22,5 @@ https://webrobots.io/indiegogo-dataset/
 - Line by line search
 - Read all data by line into buffer before merge.
 - Basic error handling for file reading and parsing.
+- Loop for reuse.
+- Search History in local drive.

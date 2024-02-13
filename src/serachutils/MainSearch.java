@@ -1,5 +1,7 @@
 package serachutils;
 
+import fileutils.Recorder;
+
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,7 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class MainSearch {
-    private static Map<String, Map<LocalDateTime, Integer>> searchHistory = new HashMap<>();
+    private static Map<String, Map<LocalDateTime, Integer>> searchHistory = Recorder.HistoryGetter();
     public static void searchWithHistory() {
         // Keyword getter
         Scanner scanner = new Scanner(System.in);
@@ -30,6 +32,9 @@ public class MainSearch {
 
         // Call searcher with keyword (Or whatever is needed)
         JsonComponent.main(new String[]{keyword});
+
+        // Save Search History
+        Recorder.HistorySaver(searchHistory);
     }
 
     public static void printSearchHistorySummary() {

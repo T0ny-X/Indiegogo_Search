@@ -41,10 +41,11 @@ public class Main {
                             %n""");
             Scanner menu = new Scanner(System.in);
             function = menu.nextLine().toLowerCase();
-            if (function.equals("1")) {
-                MainSearch.searchWithHistory();
-            } else if (function.equals("2")) {
-                MainSearch.printSearchHistorySummary();
+            switch (function) {
+                case "1" -> MainSearch.searchWithHistory();
+                case "2" -> MainSearch.printSearchHistorySummary();
+                case "q" -> System.out.print("Exiting...");
+                default -> System.out.println("Invalid input. Please enter 'y' or 'n'.");
             }
         }
         // Out of the loop
