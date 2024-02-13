@@ -7,9 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Scanner;
 
-public class JsonSearcher {
+public class JsonComponent {
 
     public static void main(String[] args) {
         String keyword = args[0];
