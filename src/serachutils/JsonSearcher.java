@@ -12,10 +12,7 @@ import java.util.Scanner;
 public class JsonSearcher {
 
     public static void main(String[] args) {
-        // Keyword getter
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the keyword to search: ");
-        String keyword = scanner.nextLine().toLowerCase();
+        String keyword = args[0];
 
         // Search and display
         searchAndDisplay(keyword);
@@ -23,7 +20,8 @@ public class JsonSearcher {
 
     private static void searchAndDisplay(String keyword) {
         // Search Part
-        try (BufferedReader reader = new BufferedReader(new FileReader("merged.json"))) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("merged.json"));
             String line;
             while ((line = reader.readLine()) != null) {
 
