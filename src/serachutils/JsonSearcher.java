@@ -6,17 +6,22 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class JsonSearcher {
 
-    public static void main() {
+    public static void main(String[] args) {
         // Keyword getter
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the keyword to search: ");
-        String keyword = scanner.nextLine();
+        String keyword = scanner.nextLine().toLowerCase();
 
+        // Search and display
+        searchAndDisplay(keyword);
+    }
 
+    private static void searchAndDisplay(String keyword) {
         // Search Part
         try (BufferedReader reader = new BufferedReader(new FileReader("merged.json"))) {
             String line;
@@ -35,21 +40,27 @@ public class JsonSearcher {
                         JSONObject dataObj = obj.getJSONObject("data"); // Deeper level sue to given structure
 
                         // Check for keyword in title, tagline, and category, GPT thinks search all filed gives more ideal result.
-                        if (dataObj.has("title") && dataObj.getString("title").toLowerCase().contains(keyword.toLowerCase())
-                                || dataObj.has("tagline") && dataObj.getString("tagline").toLowerCase().contains(keyword.toLowerCase())
-                                || dataObj.has("category") && dataObj.getString("category").toLowerCase().contains(keyword.toLowerCase())) {
+                        boolean hasKeyword = dataObj.has("title") && dataObj.getString("title").toLowerCase().contains(keyword)
+                                || dataObj.has("tagline") && dataObj.getString("tagline").toLowerCase().contains(keyword)
+                                || dataObj.has("category") && dataObj.getString("category").toLowerCase().contains(keyword);
 
+
+                        if (hasKeyword){
                             // Gather the data if the condition are met.
                             String title = dataObj.optString("title", "N/A");
-                            String fundRaisedPercent = dataObj.optString("funds_raised_percent", "N/A");
-                            String closeDate = dataObj.optString("close_date", "N/A");
+                            String fundRaisedPercent = formatPercent(dataObj.optString("funds_raised_percent", "0"));
+                            String closeDate = formatDate(dataObj.optString("close_date", "N/A"));
 
                             // Pretty format
-                            System.out.println("**************************");
-                            System.out.println("Project Title: " + title);
-                            System.out.println("Fund Raised Percent: " + fundRaisedPercent);
-                            System.out.println("Close Date: " + closeDate);
-                            System.out.println("--------------------------");
+                            System.out.printf(
+                                    """
+                                            **************************
+                                            Project Title: %s
+                                            Fund Raised Percent: %s
+                                            Close Date: %s
+                                            --------------------------
+                                            %n""", title, fundRaisedPercent, closeDate);
+
                         }
                     }
 
@@ -61,6 +72,24 @@ public class JsonSearcher {
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    private static String formatPercent(String percent) {
+        try {
+            double value = Double.parseDouble(percent);
+            return String.format("%.2f%%", value);
+        } catch (NumberFormatException e) {
+            return percent; // Return original value if parsing fails
+        }
+    }
+
+    private static String formatDate(String date) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            return new SimpleDateFormat("dd/MM/yyyy").format(formatter.parse(date));
+        } catch (Exception e) {
+            return date; // Return original value if parsing or formatting fails
         }
     }
 }

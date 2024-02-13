@@ -14,18 +14,18 @@ public class Main {
             String answer = scanner.nextLine().toLowerCase();
 
             if (answer.equals("y")) {
-                fileutils.FileMerger.main(); // Merge the files in resources
+                fileutils.FileMerger.main(new String[]{"Optional Arguments Here"}); // Merge the files in resources
             } else if (answer.equals("n")) {
                 System.out.println("Skipped");
             } else {
                 System.out.println("Invalid input. Please enter 'y' or 'n'.");
             }
         } else {
-            fileutils.FileMerger.main(); // Merge the files in resources
+            fileutils.FileMerger.main(new String[]{"Optional Arguments Here"}); // Merge the files in resources
         }
 
         // Search Part
-        serachutils.JsonSearcher.main();
+        serachutils.JsonSearcher.main(new String[]{"Optional Arguments Here"});
 
     }
 }
